@@ -1,0 +1,19 @@
+<template name="postEdit">
+    <form class="main form">
+        <div class="form-group">
+            <label class="control-label" for="title">标题</label>
+            <div class="controls">
+                <input name="title" id="title" type="text" value="{{title}}" placeholder="请输入标题" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-lable" for="url">网址</label>
+            <div class="controls">
+                <input name="url" id="url" type="text" value="{{url}}" placeholder="请输入网址" class="form-control">
+            </div>
+        </div>
+        <input type="submit" value="水贴" class="btn btn-primary">
+        <hr/>
+        <a class="btn btn-danger delete" href="#">扔掉</a>
+    </form>
+</template>

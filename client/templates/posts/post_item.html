@@ -2,6 +2,10 @@
     <div class="post">
         <div class="post-content">
             <h3><a href="{{ url }}">{{ title }}</a><span>{{ domain }}</span></h3>
+            <p>
+                {{author}}
+                {{#if ownPost}}<a href="{{pathFor 'postEdit'}}" style="margin-left: 2em">编辑</a>{{/if}}
+            </p>
         </div>
         <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">吐槽</a>
     </div>
