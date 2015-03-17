@@ -10,18 +10,35 @@ Template.postSubmit.events({
             title: $(e.target).find('[name=title]').val()
         };
 
+        var errors = validatePost(post);
+        if(errors.title || errors.url){
+            return Session.set('postSubmitErrors',errors);
+        }
+
         Meteor.call('postInsert', post, function (error, result) {
             // 显示错误信息并退出
             if (error) {
-                return alert(error.reason);
+                return throwError(error.reason);
             }
 
             if (result.postExists) {
-                alert('该链接已经存在！');
+                throwError('该链接已经存在！');
             }
-
         });
 
         Router.go('postsList');
     }
 });
+
+Template.postSubmit.created = function () {
+    Session.set('postSubmitErrors',{});
+};
+
+Template.postSubmit.helpers({
+    errorMessage: function (field) {
+        return Session.get('postSubmitErrors')[field];
+    },
+    errorClass: function (field) {
+        return !! Session.get('postSubmitErrors')[field]?'has-error':'';
+    }
+})

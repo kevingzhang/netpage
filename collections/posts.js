@@ -14,6 +14,11 @@ Meteor.methods({
             url: String
         });
 
+        var errors = validatePost(postAttributes);
+        if(errors.title || errors.url){
+            throw new Meteor.Error('invalid-post','一定要填写标题和网址哦！')
+        }
+
         var postWithSameList = Posts.findOne({url: postAttributes.url});
         if (postWithSameList) {
             return {
@@ -52,3 +57,19 @@ Posts.deny({
         return (_.without(fieldNames, 'url', 'title').length > 0);
     }
 });
+
+Posts.deny({
+    update: function (userId,post,fieldNames,modifier) {
+        var errors = validatePost(modifier.$set);
+        return errors.title || errors.url;
+    }
+});
+
+validatePost = function (post) {
+    var errors = {};
+    if (!post.title)
+        errors.title = "一定要填写标题哦!";
+    if (!post.url)
+        errors.url =  "一定要填写网址哦!";
+    return errors;
+};
