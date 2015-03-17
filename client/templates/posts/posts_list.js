@@ -4,6 +4,6 @@
 // 绑定帖子 查找所有帖子
 Template.postsList.helpers({
     posts: function () {
-        return Posts.find();
+        return Posts.find({}, {sort: {submitted: -1}});
     }
-})
+});
