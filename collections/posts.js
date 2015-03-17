@@ -14,6 +14,14 @@ Meteor.methods({
             url:String
         });
 
+        if(Meteor.isServer){
+            postAttributes.title += "(Service)";
+            // 等待5秒
+            Meteor._sleepForMs(5000);
+        }else{
+            postAttributes.title += "(client)";
+        }
+
         var postWithSameList = Posts.findOne({url:postAttributes.url});
         if(postWithSameList){
             return {
