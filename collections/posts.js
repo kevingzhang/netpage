@@ -33,7 +33,8 @@ Meteor.methods({
             userId: user._id,
             author: user.username,
             submitted: new Date(),
-            flagged: false
+            flagged: false,
+            commentsCount: 0
         });
         var postId = Posts.insert(post);
         return {
@@ -73,3 +74,4 @@ validatePost = function (post) {
         errors.url =  "一定要填写网址哦!";
     return errors;
 };
+

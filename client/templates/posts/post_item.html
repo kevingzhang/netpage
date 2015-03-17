@@ -3,10 +3,11 @@
         <div class="post-content">
             <h3><a href="{{ url }}">{{ title }}</a><span>{{ domain }}</span></h3>
             <p>
-                {{author}}
-                {{#if ownPost}}<a href="{{pathFor 'postEdit'}}" style="margin-left: 1em">编辑</a>{{/if}}
+                {{author}}&nbsp;&nbsp;
+                <a href="{{pathFor 'postPage'}}">{{commentsCount}}个吐槽</a>&nbsp;&nbsp;
+                {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">反悔</a>{{/if}}
             </p>
         </div>
-        <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">吐槽</a>
+        <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">围观</a>
     </div>
 </template>
