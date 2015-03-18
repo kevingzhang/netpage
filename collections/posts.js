@@ -46,17 +46,17 @@ Meteor.methods({
     upvote: function (postId) {
         check(this.userId,String);
         check(postId,String);
-        var post = Posts.findOne(postId);
-        if(!post){
-            throw new Meteor.Error('invalid','帖子不存在哦！');
-        }
-        if(_.include(post.upvoters,this.userId)){
-            throw new Meteor.Error('invalid','已经赞过了哦')
-        }
-        Posts.update(post._id,{
+        var affected = Posts.update({
+            _id:postId,
+            upvoters:{$ne:this.userId}
+        },{
             $addToSet:{upvoters:this.userId},
             $inc:{votes:1}
         });
+
+        if(!affected){
+            throw new Meteor.Error('invalid','你已经赞过了哦！')
+        }
     }
 });
 
