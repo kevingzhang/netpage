@@ -17,3 +17,7 @@ Meteor.publish('comments', function (postId) {
     check(postId,String);//要加校验， 不然页面会卡死
     return Comments.find({postId:postId});
 });
+
+Meteor.publish('notifications', function () {
+    return Notifications.find({userId:this.userId,read:false});
+})
