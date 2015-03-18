@@ -4,17 +4,12 @@
 /**
  * 发布帖子，使客户端能查看到
  */
-Meteor.publish('posts', function (options) {
-    check(options,{
-        sort:Object,
-        limit:Number
+Meteor.publish('posts', function(options) {
+    check(options, {
+        sort: Object,
+        limit: Number
     });
-    options_new = _.extend(options, {
-        fields:{
-            flagged:false
-        }
-    });
-    return Posts.find({flagged:false},options_new);
+    return Posts.find({}, options);
 });
 
 Meteor.publish('singlePost', function (id) {

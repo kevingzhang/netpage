@@ -33,7 +33,7 @@ Template.postEdit.events({
         if(confirm("真的要删除这帖子么::>_<::")){
             var currentPostId = this._id;
             Posts.remove(currentPostId);
-            Router.go('postsList');
+            Router.go('home');
         }
     }
 });
