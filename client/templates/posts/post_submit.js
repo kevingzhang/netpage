@@ -24,9 +24,8 @@ Template.postSubmit.events({
             if (result.postExists) {
                 throwError('该链接已经存在！');
             }
+            Router.go('postPage', {_id: result._id});
         });
-
-        Router.go('postsList');
     }
 });
 
