@@ -3,7 +3,8 @@
  */
 Template.notifications.helpers({
     notifications: function () {
-        return Notifications.find({userId:Meteor.userId(),read:false});
+        return Notifications.find({userId:Meteor.userId(),read:false});//这一行是你应该加排序条件的地方, find()可以有多个参数, 第二个参数可以 sort: 然后是你的排序条件. 后端的排序和 UI 显示无关
+        
     },
     notificationCount: function () {
         return Notifications.find({userId:Meteor.userId(),read:false}).count();
